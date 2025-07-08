@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+  <div class="container">
+      <a href="/adminpanle/"><button type="button" class="btn btn-primary"> Back</button>
+      </a>
+   </div>
+<h2 class="text-center mb-4 text-primary">🗳️ Election Results</h2>
+
+<div class="table-responsive">
+  <table class="table table-hover table-bordered align-middle shadow-sm">
+    <thead class="table-dark">
+      <tr class="text-center">
+        <th>#</th>
+        <th>Candidate</th>
+        <th>Party</th>
+        <th>Votes</th>
+        <th style="width: 30%;">Progress</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% with max_votes=candidates.0.votes %}
+      {% for c in candidates %}
+      <tr>
+        <td class="text-center">{{ forloop.counter }}</td>
+        <td><strong>{{ c.name }}</strong></td>
+        <td><span class="badge bg-info text-dark">{{ c.party }}</span></td>
+        <td class="text-center">{{ c.votes }}</td>
+        <td>
+          <div class="progress" style="height: 20px;">
+            {% if max_votes > 0 %}
+            {% widthratio c.votes max_votes 100 as percentage %}
+            <div class="progress-bar bg-success" role="progressbar" style="width: {{ percentage }}%;" aria-valuenow="{{ percentage }}" aria-valuemin="0" aria-valuemax="100">
+              {{ percentage }}%
+            </div>
+            {% else %}
+            <div class="progress-bar bg-secondary" style="width: 0%;">0%</div>
+            {% endif %}
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+      {% endwith %}
+    </tbody>
+  </table>
+</div>
+</div>
+
+{% endblock %}

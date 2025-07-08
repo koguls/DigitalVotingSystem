@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow p-4 mx-auto" style="max-width: 600px;">
+    <h3 class="mb-4 text-center">🗳️ Create New Election</h3>
+    {% for msg in messages %}
+    <div class="alert alert-success" role="alert">
+       {{msg}}
+    </div>
+   {% endfor %}
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="text-center mt-3">
+        <button type="submit" class="btn btn-success">✅ Create</button>
+        <a href="{% url 'election_list' %}" class="btn btn-secondary">🔙 Back</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

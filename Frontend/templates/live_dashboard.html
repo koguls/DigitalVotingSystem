@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+        body {
+            background: #f8f9fa;
+        }
+        .card {
+            border-radius: 1rem;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+        .card .card-body {
+            padding: 2rem;
+            text-align: center;
+        }
+        .card .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .card .card-text {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        .dashboard-row {
+            gap: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <h1 class="text-center mb-5">🗳️ Live Election Dashboard</h1>
+        <div class="row dashboard-row row-cols-1 row-cols-md-4">
+
+            <!-- Election Status Card -->
+            <div class="col">
+                <div class="card text-white
+                    {% if active_election %}
+                        bg-success
+                    {% else %}
+                        bg-secondary
+                    {% endif %}
+                ">
+                    <div class="card-body">
+                        <h5 class="card-title">Election Status</h5>
+                        <p class="card-text">
+                            {% if active_election %}
+                                Active 🟢
+                            {% else %}
+                                Not Active 🔴
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Voters Card -->
+            <div class="col">
+                <div class="card bg-primary text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Voters</h5>
+                        <p class="card-text">{{ total_voters }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Voted Voters Card -->
+            <div class="col">
+                <div class="card bg-info text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Voted Voters</h5>
+                        <p class="card-text">{{ voted_voters }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Voting Percentage Card -->
+            <div class="col">
+                <div class="card bg-warning text-dark">
+                    <div class="card-body">
+                        <h5 class="card-title">Voting Percentage</h5>
+                        <p class="card-text">{{ voting_percentage }}%</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
